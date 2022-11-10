@@ -31,7 +31,7 @@ export class Router {
 
   /** @returns {String} */
   static get routingEventName() {
-    return this.__routingEventName || 'sym-on-route';
+    return this.__routingEventName || 'jam-on-route';
   }
 
   static readAddressBar() {

@@ -42,7 +42,7 @@ export class Router {
     let paramsArr = window.location.search.split(this.separator);
     paramsArr.forEach((part) => {
       if (part.includes('?')) {
-        result.route = part.replace('?', '');
+        result.route = part.replace('?', '').trim();
       } else if (part.includes('=')) {
         let pair = part.split('=');
         result.options[pair[0]] = decodeURI(pair[1]);
@@ -59,7 +59,7 @@ export class Router {
     if (routeScheme && routeScheme.title) {
       document.title = routeScheme.title;
     }
-    if (routeBase.route === null && this.defaultRoute) {
+    if (!routeBase.route && this.defaultRoute) {
       this.applyRoute(this.defaultRoute);
       return;
     } else if (!routeScheme && this.errorRoute) {

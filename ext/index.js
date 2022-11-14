@@ -1,1 +1,1 @@
-export { JamDwa } from './jam-dwa.js';
+export { JamDwa } from './x-dwa.js';

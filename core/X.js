@@ -623,3 +623,5 @@ export class X extends HTMLElement {
     }
   }
 }
+
+export default X;

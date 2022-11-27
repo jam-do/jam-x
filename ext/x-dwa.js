@@ -1,6 +1,6 @@
 import { X } from '../core/X.js';
 
-export class JamDwa extends X {
+export class XDWA extends X {
 
   initCallback() {
     this.sub('src', async (val) => {
@@ -19,9 +19,11 @@ export class JamDwa extends X {
 
 }
 
-JamDwa.bindAttributes({
+XDWA.bindAttributes({
   src: 'src',
   npm: 'npm',
 });
 
-JamDwa.reg('jam-dwa');
+XDWA.reg('x-dwa');
+
+export default XDWA;

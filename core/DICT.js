@@ -9,11 +9,11 @@ export const DICT = Object.freeze({
   // Named data context property splitter:
   NAMED_CTX_SPLTR: '/',
   // Data context name attribute:
-  CTX_NAME_ATTR: 'x-id',
+  CTX_NAME_ATTR: 'ctx',
   // Data context owner attribute:
   CTX_OWNER_ATTR: 'data-owner',
   // Data context name in CSS custom property:
-  CSS_CTX_PROP: '--x-id',
+  CSS_CTX_PROP: '--ctx',
   // Element reference attribute:
   EL_REF_ATTR: 'ref',
   // Prefix for auto generated tag names:

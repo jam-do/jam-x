@@ -121,7 +121,7 @@ export class Cluster {
    * @param {String} id
    */
   getValue(id) {
-    return this.getVtx(id).value;
+    return this.getVtx(id)?.value || null;
   }
 
   /**

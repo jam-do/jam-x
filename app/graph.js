@@ -80,13 +80,10 @@ export class Cluster {
 
   /** 
    * @param {*} data 
-   * @param {String} [label]
+   * @param {String} label
    * @param {String} [id]
    */
-  addValue(data, label = '', id) {
-    if (!label) {
-      label = data?.constructor.name.toUpperCase() || UNLABELED;
-    }
+  addValue(data, label, id) {
     let vtx = new Vertex({
       value: data,
       label,
@@ -296,18 +293,19 @@ export class Cluster {
   /**
    *
    * @param {String} query
+   * @param {String} [label]
    * @param {String} [fieldName]
    * @returns {String[]}
    */
-  search(query, fieldName = '') {
+  search(query, label = '', fieldName = '') {
     let result = [];
-    this.keys.forEach((id) => {
+    (label ? this.getLabeledVtxList(label) : this.keys).forEach((id) => {
       let str = '';
-      let vtx = this.getVtx(id);
-      if (fieldName && vtx.value[fieldName]) {
-        str = JSON.stringify(vtx.value[fieldName]);
-      } else {
-        str = JSON.stringify(vtx.value);
+      let vtxVal = this.getVtx(id).value;
+      if (fieldName && vtxVal.hasOwnProperty(fieldName)) {
+        str = JSON.stringify(vtxVal[fieldName]);
+      } else if (!fieldName) {
+        str = JSON.stringify(vtxVal);
       }
       if (str.includes(query)) {
         result.push(id);
@@ -436,8 +434,10 @@ export class Cluster {
    * 
    * @param {(vtx:Vertex) => Boolean} checkFn 
    * @param {String[]} [inputList] 
+   * @returns {String[]}
    */
   filter(checkFn, inputList) {
+    /** @type {String[]} */
     let result = [];
     (inputList || this.keys).forEach((id) => {
       let vtx = this.getVtx(id);

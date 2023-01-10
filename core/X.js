@@ -416,7 +416,7 @@ export class BaseComponent extends HTMLElement {
     this.__disconnectTimeout = window.setTimeout(() => {
       this.destroyCallback();
       for (let sub of this.allSubs) {
-        sub.remove();
+        sub?.remove();
         this.allSubs.delete(sub);
       }
       for (let proc of this.tplProcessors) {

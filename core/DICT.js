@@ -19,9 +19,9 @@ export const DICT = Object.freeze({
   // Prefix for auto generated tag names:
   AUTO_TAG_PRFX: 'jam',
   // Template list source data attribute:
-  REPEAT_ATTR: 'repeat',
+  REPEAT_ATTR: 'list',
   // List item tag name:
-  REPEAT_ITEM_TAG_ATTR: 'repeat-item-tag',
+  REPEAT_ITEM_TAG_ATTR: 'list-item-tag',
   // Key to restore nested properties was set before component construction
   SET_LATER_KEY: '__toSetLater__',
   // Attribute to provide selector of custom template

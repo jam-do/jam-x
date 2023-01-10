@@ -14,9 +14,9 @@ let styleMutationObserver = null;
 let styleMutationObserverCbList = null;
 
 /** @template S */
-export class X extends HTMLElement {
-  get X() {
-    return X;
+export class BaseComponent extends HTMLElement {
+  get BaseComponent() {
+    return BaseComponent;
   }
 
   initCallback() {}
@@ -105,7 +105,7 @@ export class X extends HTMLElement {
   }
 
   /**
-   * @template {X} T
+   * @template {BaseComponent} T
    * @param {(fr: DocumentFragment | T, fnCtx: T) => void} processorFn
    */
   addTemplateProcessor(processorFn) {
@@ -118,7 +118,7 @@ export class X extends HTMLElement {
     this.init$ = Object.create(null);
     /** @type {Object<string, any>} */
     this.cssInit$ = Object.create(null);
-    /** @type {Set<(fr: DocumentFragment | X, fnCtx: unknown) => void>} */
+    /** @type {Set<(fr: DocumentFragment | BaseComponent, fnCtx: unknown) => void>} */
     this.tplProcessors = new Set();
     /** @type {Object<string, any>} */
     this.ref = Object.create(null);
@@ -181,7 +181,7 @@ export class X extends HTMLElement {
 
   /**
    * @private
-   * @template {X} T
+   * @template {BaseComponent} T
    * @param {String} prop
    * @param {T} fnCtx
    */
@@ -220,7 +220,7 @@ export class X extends HTMLElement {
       }
       handler(val);
     };
-    let parsed = X.__parseProp(/** @type {string} */ (prop), this);
+    let parsed = BaseComponent.__parseProp(/** @type {string} */ (prop), this);
     // @ts-ignore
     if (!parsed.ctx.has(prop)) {
       // Avoid *prop binding race:
@@ -234,13 +234,13 @@ export class X extends HTMLElement {
 
   /** @param {String} prop */
   notify(prop) {
-    let parsed = X.__parseProp(prop, this);
+    let parsed = BaseComponent.__parseProp(prop, this);
     parsed.ctx.notify(parsed.name);
   }
 
   /** @param {String} prop */
   has(prop) {
-    let parsed = X.__parseProp(prop, this);
+    let parsed = BaseComponent.__parseProp(prop, this);
     return parsed.ctx.has(parsed.name);
   }
 
@@ -251,7 +251,7 @@ export class X extends HTMLElement {
    * @param {Boolean} [rewrite]
    */
   add(prop, val, rewrite = false) {
-    let parsed = X.__parseProp(/** @type {String} */ (prop), this);
+    let parsed = BaseComponent.__parseProp(/** @type {String} */ (prop), this);
     parsed.ctx.add(parsed.name, val, rewrite);
   }
 
@@ -272,12 +272,12 @@ export class X extends HTMLElement {
       /** @private */
       this.__stateProxy = new Proxy(o, {
         set: (obj, /** @type {String} */ prop, val) => {
-          let parsed = X.__parseProp(prop, this);
+          let parsed = BaseComponent.__parseProp(prop, this);
           parsed.ctx.pub(parsed.name, val);
           return true;
         },
         get: (obj, /** @type {String} */ prop) => {
-          let parsed = X.__parseProp(prop, this);
+          let parsed = BaseComponent.__parseProp(prop, this);
           return parsed.ctx.read(parsed.name);
         },
       });
@@ -622,6 +622,37 @@ export class X extends HTMLElement {
       this.__rootStylesLink = link;
     }
   }
+}
+
+export class X extends BaseComponent {
+
+  get X() {
+    return X;
+  }
+
+  connectedCallback() {
+
+    if (this.hasAttribute('template-id')) {
+      this.pauseRender = true;
+      let tplId = this.getAttribute('template-id');
+      /** @type { Partial<HTMLElement> } */
+      let root = this.getRootNode();
+      /** @type { HTMLTemplateElement } */
+      let tpl = root?.querySelector(`template#${tplId}`) || document.querySelector(`#${tplId}`);
+      if (tpl) {
+        this.__domTemplateFragment = tpl.content.cloneNode();
+        let styles = [...tpl.content.querySelectorAll('style')];
+        let cssTxt = '';
+        styles.forEach((styleEl) => {
+          cssTxt += styleEl.textContent.trim();
+          styleEl.remove();
+        });
+        this.__cssTxt = cssTxt;
+      }
+    }
+    super.connectedCallback();
+  }
+
 }
 
 export default X;

@@ -194,6 +194,10 @@ export class Cluster {
     let vtx = this.getVtx(id);
     vtx.edges.forEach((conId) => {
       let conVtx = this.getVtx(conId);
+      // If connected vertex was removed before:
+      if (!conVtx) {
+        return;
+      }
       this.unlink(conVtx.uid, id);
     });
     delete this.store[id];

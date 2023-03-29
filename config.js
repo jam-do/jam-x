@@ -4,21 +4,14 @@ export const SYM_PATH_KEY = 'symbiote_index';
 
 /**
  * @param {String} key
- * @returns {Promise<String>}
+ * @returns {String}
  */
-export async function getCfgVal(key) {
+export function getCfgVal(key) {
   let libPath = DEFAULT_PATH;
   if (typeof window !== 'undefined') {
     libPath = window[CFG_KEY]?.[key];
   } else {
-    try {
-      let process = await import('process');
-      if (process) {
-        libPath = process.env[CFG_KEY];
-      }
-    } catch (e) {
-      console.error(e);
-    }
+    libPath = '@symbiotejs/symbiote';
   }
   return libPath || DEFAULT_PATH;
 }

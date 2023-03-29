@@ -1,11 +1,26 @@
-export const WINDOW_CFG_KEY = '_JAM_X_CFG_';
+export const CFG_KEY = 'JAM_X_CFG';
+export const DEFAULT_PATH = 'https://esm.sh/@symbiotejs/symbiote/';
+export const SYM_PATH_KEY = 'symbiote_index';
 
 /**
  * @param {String} key
- * @returns {String}
+ * @returns {Promise<String>}
  */
-function getCfgVal(key) {
-  return window[WINDOW_CFG_KEY]?.[key];
+export async function getCfgVal(key) {
+  let libPath = DEFAULT_PATH;
+  if (window) {
+    libPath = window[CFG_KEY]?.[key];
+  } else {
+    try {
+      let process = await import('process');
+      if (process) {
+        libPath = process.env[CFG_KEY];
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  return libPath || DEFAULT_PATH;
 }
 
 /**
@@ -15,5 +30,5 @@ function getCfgVal(key) {
 
 /** @type {SymConfig} */
 export default {
-  symbiote_core: getCfgVal('symbiote_core') || 'https://esm.sh/@symbiotejs/symbiote/',
+  symbiote_core: await getCfgVal(SYM_PATH_KEY),
 }

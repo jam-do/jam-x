@@ -8,7 +8,7 @@ export const SYM_PATH_KEY = 'symbiote_index';
  */
 export async function getCfgVal(key) {
   let libPath = DEFAULT_PATH;
-  if (window) {
+  if (typeof window !== 'undefined') {
     libPath = window[CFG_KEY]?.[key];
   } else {
     try {
@@ -25,10 +25,10 @@ export async function getCfgVal(key) {
 
 /**
  * @typedef {Object} SymConfig
- * @property {String} symbiote_core
+ * @property {String} symbiote_index
  */
 
 /** @type {SymConfig} */
 export default {
-  symbiote_core: await getCfgVal(SYM_PATH_KEY),
+  [SYM_PATH_KEY]: await getCfgVal(SYM_PATH_KEY),
 }

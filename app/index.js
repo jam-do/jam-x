@@ -1,3 +1,2 @@
-export { Router } from './Router.js';
-export { IDB } from './IDB.js';
-export { Vertex, Cluster } from './graph.js';
+export { Vertex } from './graph/Vertex.js';
+export { Cluster } from './graph/Cluster.js';

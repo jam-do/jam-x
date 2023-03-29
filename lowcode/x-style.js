@@ -1,4 +1,4 @@
-import X from '../core/X.js';
+import { X } from '../core/X.js';
 
 export class XStyle extends X {
   constructor() {
@@ -7,12 +7,13 @@ export class XStyle extends X {
   }
 
   initCallback() {
-    let css = this.textContent;
+    let css = this.textContent || '';
     let id = this.getAttribute('tpl-id');
     /** @type {Partial<HTMLElement & Document>} */
     // @ts-ignore
     let root = this.getRootNode() || document;
     this.remove();
+    // @ts-ignore
     let readyStyle = root.querySelector(`[tpl-id='${id}']`);
     if (readyStyle) {
       return;
@@ -24,7 +25,9 @@ export class XStyle extends X {
     let link = document.createElement('link');
     link.href = url;
     link.rel = 'stylesheet';
+    // @ts-ignore
     link.setAttribute('tpl-id', id);
+    // @ts-ignore
     (root.head ? root.head : root).appendChild(link);
   }
 }

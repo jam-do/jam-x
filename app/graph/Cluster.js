@@ -1,31 +1,13 @@
-import { UID } from '../utils/UID.js';
+import { Data, UID } from '../../core/X.js';
+import { Vertex } from './Vertex.js';
 
 function log(msg) {
   console.warn('jam-graph: ' + msg);
 }
 
-const UNLABELED = 'UNLABELED';
-
-export class Vertex {
-  /**
-   * 
-   * @param {Partial<Vertex>} src 
-   */
-  constructor(src = {}) {
-    /** @type {String} */
-    this.uid = '';
-    /** @type {String} */
-    this.label = src.label || UNLABELED;
-    /** @type {String[]} */
-    this.edges = src.edges || [];
-    /** @type {*} */
-    this.value = src.value || Object.create(null);
-    /** @type {Number} */
-    this.timestamp = Date.now();
-  }
-}
-
 export class Cluster {
+
+  uid = UID.generate();
 
   /** @type {Object<string, Vertex>} */
   store = Object.create(null);
@@ -48,6 +30,9 @@ export class Cluster {
    * @type {Set<string>}
    */
   __labelSet = new Set();
+
+  /** @type {Object<string, Data>} */
+  __dataMap = Object.create(null);
 
   /**
    *
@@ -132,6 +117,31 @@ export class Cluster {
   }
 
   /**
+   * 
+   * @param {String} id 
+   * @returns {Data}
+   */
+  getData(id) {
+    let val = this.getValue(id);
+    if (!this.__dataMap[id]) {
+      // @ts-ignore
+      this.__dataMap[id] = Data.registerCtx(val, id);
+    }
+    return this.__dataMap[id];
+  }
+
+  /**
+   * 
+   * @param {String} id 
+   */
+  clearData(id) {
+    if (this.__dataMap?.[id]) {
+      Data.deleteCtx(id);
+      delete this.__dataMap[id];
+    }
+  }
+
+  /**
    *
    * @param {String} id
    * @param {*} newData
@@ -200,6 +210,7 @@ export class Cluster {
       }
       this.unlink(conVtx.uid, id);
     });
+    this.clearData(id);
     delete this.store[id];
     this.notify(vtx.label);
   }

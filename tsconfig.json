@@ -15,19 +15,13 @@
     "checkJs": true,
     "strict": false,
     "noImplicitThis": true,
-    "alwaysStrict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "types": [],
-    "declaration": true,
-    "emitDeclarationOnly": true,
-    "removeComments": true
+    "maxNodeModuleJsDepth": 3
   },
   "include": [
-    "core",
-    "utils",
-    "app",
-    "ext"
+    "types"
   ],
   "exclude": [
     "node_modules",

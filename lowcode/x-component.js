@@ -1,4 +1,4 @@
-import X from '../core/X.js';
+import { X } from '../core/X.js';
 
 export class XComponent extends X {
   initCallback() {
@@ -10,7 +10,7 @@ export class XComponent extends X {
       return;
     }
     let baseTag = this.getAttribute('extends');
-    let base = window.customElements.get(baseTag);
+    let base = baseTag ? window.customElements.get(baseTag) : X;
     let useShadow = this.hasAttribute('use-shadow') 
       && this.getAttribute('use-shadow') !== 'false';
     this.comClass = class extends (base || X) {
@@ -21,14 +21,16 @@ export class XComponent extends X {
       }
     }
     let tplId = this.getAttribute('template-id');
-    /** @type { Partial<HTMLElement> } */
-    let root = this.getRootNode();
+    /** @type { Partial<HTMLElement | Document> } */
+    let root = this.getRootNode() || document;
     /** @type { HTMLTemplateElement } */
+    // @ts-ignore
     let tpl = root?.querySelector(`#${tplId}`) || document.querySelector(`#${tplId}`);
     if (tpl) {
       let styles = [...tpl.content.querySelectorAll('style')];
       let cssTxt = '';
       styles.forEach((styleEl) => {
+        // @ts-ignore
         cssTxt += styleEl.textContent.trim();
         styleEl.remove();
       });

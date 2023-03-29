@@ -1,17 +1,17 @@
-import X from '../core/X.js';
-import { PubSub } from '../core/PubSub.js';
+import { X, Data } from '../core/X.js';
 
 export class XHandler extends X {
   initCallback() {
     let ctxName = this.getAttribute('ctx');
-    let dataCtx = PubSub.getCtx(ctxName);
+    let dataCtx = Data.getCtx(ctxName);
     if (!dataCtx) {
-      dataCtx = PubSub.registerCtx({}, ctxName);
+      dataCtx = Data.registerCtx({}, ctxName);
     }
     let fnName = this.getAttribute('key');
     let fnStrSrc = this.getAttribute('call');
     this.remove();
     if (fnName) {
+      // @ts-ignore
       let fn = new Function(fnStrSrc);
       let fnWrapper = (e) => {
         let root = e.currentTarget?.getRootNode() || document;

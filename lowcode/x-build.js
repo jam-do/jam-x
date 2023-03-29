@@ -1,4 +1,4 @@
-import X from '../core/X.js';
+import { X } from '../core/X.js';
 
 export class XBuild extends X {
   initCallback() {

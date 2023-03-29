@@ -1,7 +1,8 @@
 import CFG from '../config.js';
+import { SYM_PATH_KEY } from '../config.js';
 
 /** @type {import('@symbiotejs/symbiote')} */
-const SYM = (await import(CFG.symbiote_core));
+const SYM = (await import(CFG[SYM_PATH_KEY]));
 
 export const X = SYM.BaseComponent;
 export const Data = SYM.Data;

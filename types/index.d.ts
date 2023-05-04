@@ -9,17 +9,20 @@ declare module "app/graph/Vertex" {
     }
 }
 declare module "config" {
-    export const WINDOW_CFG_KEY: "_JAM_X_CFG_";
+    export function getCfgVal(key: string): string;
+    export const CFG_KEY: "JAM_X_CFG";
+    export const DEFAULT_PATH: "https://esm.sh/@symbiotejs/symbiote@2.0.0-alpha.2/";
+    export const SYM_PATH_KEY: "symbiote_index";
     const _default: SymConfig;
     export default _default;
     export type SymConfig = {
-        symbiote_core: string;
+        symbiote_index: string;
     };
 }
 declare module "core/X" {
-    export const X: typeof import("@symbiotejs/symbiote").BaseComponent;
-    export const Data: typeof import("@symbiotejs/symbiote").Data;
-    export const UID: typeof import("@symbiotejs/symbiote").UID;
+    export const X: typeof import("@symbiotejs/symbiote/core").BaseComponent;
+    export const Data: typeof import("@symbiotejs/symbiote/core").Data;
+    export const UID: typeof import("@symbiotejs/symbiote/core").UID;
 }
 declare module "app/graph/Cluster" {
     export class Cluster {
@@ -31,7 +34,7 @@ declare module "app/graph/Cluster" {
         private __cbMap;
         private __labelSet;
         __dataMap: {
-            [x: string]: typeof import("@symbiotejs/symbiote").Data;
+            [x: string]: typeof import("@symbiotejs/symbiote/core").Data;
         };
         addVtx(vtx: Vertex, id?: string): string;
         addValue(data: any, label: string, id?: string): string;
@@ -39,7 +42,7 @@ declare module "app/graph/Cluster" {
         getVtxList(idArr: string[]): Vertex[];
         getValue(id: string): any;
         getValueList(idArr: string[]): any[];
-        getData(id: string): typeof import("@symbiotejs/symbiote").Data;
+        getData(id: string): typeof import("@symbiotejs/symbiote/core").Data;
         clearData(id: string): void;
         update(id: string, newData: any, dispatcher?: any): void;
         setProperty(id: string, propertyName: string, propertyValue: any, dispatcher?: any): void;
@@ -75,21 +78,21 @@ declare module "core/index" {
     export { X, Data, UID } from "./X.js";
 }
 declare module "lowcode/x-dwa" {
-    const XDWA_base: typeof import("@symbiotejs/symbiote").BaseComponent;
+    const XDWA_base: typeof import("@symbiotejs/symbiote/core").BaseComponent;
     export class XDWA extends XDWA_base {
         constructor();
     }
     export default XDWA;
 }
 declare module "lowcode/x-build" {
-    const XBuild_base: typeof import("@symbiotejs/symbiote").BaseComponent;
+    const XBuild_base: typeof import("@symbiotejs/symbiote/core").BaseComponent;
     export class XBuild extends XBuild_base {
         constructor();
     }
     export default XBuild;
 }
 declare module "lowcode/x-component" {
-    const XComponent_base: typeof import("@symbiotejs/symbiote").BaseComponent;
+    const XComponent_base: typeof import("@symbiotejs/symbiote/core").BaseComponent;
     export class XComponent extends XComponent_base {
         constructor();
         comClass: {
@@ -418,21 +421,21 @@ declare module "lowcode/x-component" {
     export default XComponent;
 }
 declare module "lowcode/x-style" {
-    const XStyle_base: typeof import("@symbiotejs/symbiote").BaseComponent;
+    const XStyle_base: typeof import("@symbiotejs/symbiote/core").BaseComponent;
     export class XStyle extends XStyle_base {
         constructor();
     }
     export default XStyle;
 }
 declare module "lowcode/x-data" {
-    const XData_base: typeof import("@symbiotejs/symbiote").BaseComponent;
+    const XData_base: typeof import("@symbiotejs/symbiote/core").BaseComponent;
     export class XData extends XData_base {
         constructor();
     }
     export default XData;
 }
 declare module "lowcode/x-handler" {
-    const XHandler_base: typeof import("@symbiotejs/symbiote").BaseComponent;
+    const XHandler_base: typeof import("@symbiotejs/symbiote/core").BaseComponent;
     export class XHandler extends XHandler_base {
         constructor();
     }
@@ -447,7 +450,7 @@ declare module "lowcode/index" {
     export * from "lowcode/x-handler";
 }
 declare module "ui/x-data-ui" {
-    const XDataUi_base: typeof import("@symbiotejs/symbiote").BaseComponent;
+    const XDataUi_base: typeof import("@symbiotejs/symbiote/core").BaseComponent;
     export class XDataUi extends XDataUi_base {
         constructor();
     }

@@ -1,5 +1,5 @@
 export const CFG_KEY = 'JAM_X_CFG';
-export const DEFAULT_PATH = 'https://esm.sh/@symbiotejs/symbiote/';
+export const DEFAULT_SYM_PATH = 'https://esm.sh/@symbiotejs/symbiote@2.0.0-alpha.2/';
 export const SYM_PATH_KEY = 'symbiote_index';
 
 /**
@@ -7,13 +7,13 @@ export const SYM_PATH_KEY = 'symbiote_index';
  * @returns {String}
  */
 export function getCfgVal(key) {
-  let libPath = DEFAULT_PATH;
+  let libPath = DEFAULT_SYM_PATH;
   if (typeof window !== 'undefined') {
     libPath = window[CFG_KEY]?.[key];
   } else {
     libPath = '@symbiotejs/symbiote';
   }
-  return libPath || DEFAULT_PATH;
+  return libPath || DEFAULT_SYM_PATH;
 }
 
 /**

@@ -8,5 +8,9 @@
     "emitDeclarationOnly": true,
     "removeComments": true,
     "outFile": "./types/index.d.ts"
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "types"
+  ]
 }

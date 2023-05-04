@@ -14,7 +14,7 @@
   "module": "./index.js",
   "exports": {
     ".": "./index.js",
-    "./app": "./app/index.js",
+    "./iso": "./iso/index.js",
     "./core": "./core/index.js",
     "./ext": "./ext/index.js",
     "./utils": "./utils/index.js",
@@ -24,7 +24,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "jam-x",
   "author": "hello@jam-do.org",
   "license": "MIT",

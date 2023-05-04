@@ -1,4 +1,5 @@
-import { Data, UID } from '../../core/X.js';
+import { Data } from '../../symbiote/core/Data.js';
+import { UID } from '../../symbiote/utils/UID.js';
 import { Vertex } from './Vertex.js';
 
 function log(msg) {

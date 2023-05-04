@@ -1,6 +1,6 @@
 export const CFG_KEY = 'JAM_X_CFG';
-export const DEFAULT_SYM_PATH = 'https://esm.sh/@symbiotejs/symbiote@2.0.0-alpha.2/';
 export const SYM_PATH_KEY = 'symbiote_index';
+export const DEFAULT_SYM_PATH = 'https://esm.sh/@symbiotejs/symbiote@2.0.0-alpha.2/';
 
 /**
  * @param {String} key

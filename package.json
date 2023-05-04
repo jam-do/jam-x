@@ -17,13 +17,14 @@
     "./app": "./app/index.js",
     "./core": "./core/index.js",
     "./ext": "./ext/index.js",
-    "./utils": "./utils/index.js"
+    "./utils": "./utils/index.js",
+    "./symbiote": "./symbiote/core/index.js"
   },
   "types": "./types/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "jam-x",
   "author": "hello@jam-do.org",
   "license": "MIT",

@@ -1,0 +1,4 @@
+[submodule "symbiote"]
+	path = symbiote
+	url = https://github.com/symbiotejs/symbiote.js.git
+	branch = alpha

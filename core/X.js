@@ -1,11 +1,8 @@
-import CFG from '../config.js';
-import { SYM_PATH_KEY } from '../config.js';
+import { BaseComponent } from '../symbiote/core/BaseComponent.js';
+export { Data } from '../symbiote/core/Data.js';
+export { UID } from '../symbiote/utils/UID.js'; 
 
-/** @type {import('@symbiotejs/symbiote/core')} */
-const SYM = (await import(CFG[SYM_PATH_KEY]));
+export class X extends BaseComponent {}
 
-export const X = SYM.BaseComponent;
-export const Data = SYM.Data;
-export const UID = SYM.UID;
 
 

@@ -1,0 +1,63 @@
+<style>
+  body {
+    font-family: monospace;
+  }
+  x-object-ui table {
+    border-left: 1px solid #ccc;
+    border-spacing: 0;
+  }
+  x-object-ui td {
+    border-bottom: 1px solid #ccc;
+    padding: 6px;
+  }
+  .toolbar {
+    padding: 6px;
+    border-left: 1px solid #ccc;
+  }
+</style>
+
+<script src="../../lowcode/x-object-ui.js" type="module"></script>
+
+<button toggle-btn>Toggle editable</button>
+
+<hr />
+
+<x-object-ui></x-object-ui>
+
+<script type="module">
+  await window.customElements.whenDefined('x-object-ui');
+  let xo = document.querySelector('x-object-ui');
+  xo.rootStyles = /*css*/ `
+    td {
+      border: 1px solid currentColor;
+    }
+  `;
+  xo.$.data = {
+    option1: 'TEST',
+    option2: true,
+    option3: false,
+    option4: {
+      nested1: 'NESTED TEXT 1',
+      nested2: 'NESTED TEXT 2',
+    },
+    option5: [
+      'one',
+      'two',
+      'three',
+    ],
+  };
+
+  let btn = document.querySelector('[toggle-btn]');
+  btn.onclick = () => {
+    if (xo.hasAttribute('editable')) {
+      xo.removeAttribute('editable');
+    } else {
+      xo.setAttribute('editable', '');
+    }
+  };
+
+  window.addEventListener('change', (e) => {
+    console.log(e);
+    console.log(xo.$.data);
+  });
+</script>

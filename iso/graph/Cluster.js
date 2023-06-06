@@ -1,4 +1,4 @@
-import { Data } from '../../symbiote/core/Data.js';
+import { PubSub } from '../../symbiote/core/PubSub.js';
 import { UID } from '../../symbiote/utils/UID.js';
 import { Vertex } from './Vertex.js';
 
@@ -32,7 +32,7 @@ export class Cluster {
    */
   __labelSet = new Set();
 
-  /** @type {Object<string, Data>} */
+  /** @type {Object<string, PubSub>} */
   __dataMap = Object.create(null);
 
   /**
@@ -120,13 +120,13 @@ export class Cluster {
   /**
    * 
    * @param {String} id 
-   * @returns {Data}
+   * @returns {PubSub}
    */
   getData(id) {
     let val = this.getValue(id);
     if (!this.__dataMap[id]) {
       // @ts-ignore
-      this.__dataMap[id] = Data.registerCtx(val, id);
+      this.__dataMap[id] = PubSub.registerCtx(val, id);
     }
     return this.__dataMap[id];
   }
@@ -137,7 +137,7 @@ export class Cluster {
    */
   clearData(id) {
     if (this.__dataMap?.[id]) {
-      Data.deleteCtx(id);
+      PubSub.deleteCtx(id);
       delete this.__dataMap[id];
     }
   }

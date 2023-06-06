@@ -1,4 +1,4 @@
-import { X, Data } from '../core/X.js';
+import { X, PubSub } from '../core/X.js';
 
 export class XData extends X {
   initCallback() {
@@ -6,9 +6,9 @@ export class XData extends X {
     if (!ctxId) {
       return;
     }
-    let data = Data.getCtx(ctxId);
+    let data = PubSub.getCtx(ctxId);
     if (!data) {
-      data = Data.registerCtx({}, ctxId);
+      data = PubSub.registerCtx({}, ctxId);
     }
     let dataItems = [...this.querySelectorAll('x-item')];
     dataItems.forEach((item) => {

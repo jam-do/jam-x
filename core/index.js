@@ -1,1 +1,1 @@
-export { X, Data, UID } from './X.js';
+export { X, PubSub, UID } from './X.js';

@@ -1,11 +1,11 @@
-import { X, Data } from '../core/X.js';
+import { X, PubSub } from '../core/X.js';
 
 export class XHandler extends X {
   initCallback() {
     let ctxName = this.getAttribute('ctx');
-    let dataCtx = Data.getCtx(ctxName);
+    let dataCtx = PubSub.getCtx(ctxName);
     if (!dataCtx) {
-      dataCtx = Data.registerCtx({}, ctxName);
+      dataCtx = PubSub.registerCtx({}, ctxName);
     }
     let fnName = this.getAttribute('key');
     let fnStrSrc = this.getAttribute('call');

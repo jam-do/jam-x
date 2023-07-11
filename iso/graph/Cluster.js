@@ -14,26 +14,22 @@ export class Cluster {
   store = Object.create(null);
 
   /** 
-   * @private 
    * @type {Map<Function, *>}
    */
-  __timeoutsMap = new Map();
+  #timeoutsMap = new Map();
 
   /** 
-   * @private
    * @type {Object<string,Set<Function>>}
    */
-  __cbMap = Object.create(null);
-
+  #cbMap = Object.create(null);
 
   /**
-   * @private
    * @type {Set<string>}
    */
-  __labelSet = new Set();
+  #labelSet = new Set();
 
   /** @type {Object<string, PubSub>} */
-  __dataMap = Object.create(null);
+  #dataMap = Object.create(null);
 
   /**
    *
@@ -59,7 +55,7 @@ export class Cluster {
     vtx.uid = uid;
 
     this.store[uid] = vtx;
-    this.__labelSet.add(vtx.label);
+    this.#labelSet.add(vtx.label);
     this.notify(vtx.label);
     return uid;
   }
@@ -124,11 +120,10 @@ export class Cluster {
    */
   getData(id) {
     let val = this.getValue(id);
-    if (!this.__dataMap[id]) {
-      // @ts-ignore
-      this.__dataMap[id] = PubSub.registerCtx(val, id);
+    if (!this.#dataMap[id]) {
+      this.#dataMap[id] = PubSub.registerCtx(val, id);
     }
-    return this.__dataMap[id];
+    return this.#dataMap[id];
   }
 
   /**
@@ -136,9 +131,9 @@ export class Cluster {
    * @param {String} id 
    */
   clearData(id) {
-    if (this.__dataMap?.[id]) {
+    if (this.#dataMap?.[id]) {
       PubSub.deleteCtx(id);
-      delete this.__dataMap[id];
+      delete this.#dataMap[id];
     }
   }
 
@@ -387,18 +382,18 @@ export class Cluster {
    * @returns 
    */
   subscribeOnLabel(label, callback, init = true) {
-    if (!this.__cbMap[label]) {
-      this.__cbMap[label] = new Set();
+    if (!this.#cbMap[label]) {
+      this.#cbMap[label] = new Set();
     }
-    this.__cbMap[label].add(callback);
+    this.#cbMap[label].add(callback);
     if (init) {
       this.hasLabel(label) && this.notify(label);
     }
     return {
       remove: () => {
-        this.__cbMap[label].delete(callback);
-        if (!this.__cbMap[label].size) {
-          delete this.__cbMap[label];
+        this.#cbMap[label].delete(callback);
+        if (!this.#cbMap[label].size) {
+          delete this.#cbMap[label];
         }
       },
     };
@@ -410,11 +405,11 @@ export class Cluster {
    * @param  {...*} args 
    */
   debounce(callback, args) {
-    let timeout = this.__timeoutsMap.get(callback);
+    let timeout = this.#timeoutsMap.get(callback);
     if (timeout) {
       clearTimeout(timeout);
     }
-    this.__timeoutsMap.set(callback, setTimeout(() => {
+    this.#timeoutsMap.set(callback, setTimeout(() => {
       callback(...args);
     }));
   }
@@ -424,7 +419,7 @@ export class Cluster {
    * @returns {String[]}
    */
   getLabels() {
-    return [...this.__labelSet];
+    return [...this.#labelSet];
   }
 
   /**
@@ -433,7 +428,7 @@ export class Cluster {
    * @returns {Boolean}
    */
   hasLabel(label) {
-    return this.__labelSet.has(label);
+    return this.#labelSet.has(label);
   }
 
   /**
@@ -441,7 +436,7 @@ export class Cluster {
    * @param {String} label 
    */
   notify(label) {
-    this.__cbMap[label]?.forEach((cb) => {
+    this.#cbMap[label]?.forEach((cb) => {
       this.debounce(cb, [this.getLabeledVtxList(label)]);
     });
   }
@@ -470,6 +465,18 @@ export class Cluster {
 
   clearStore() {
     this.store = Object.create(null);
+  }
+
+  mark2Delete(id) {
+    let vtx = this.getVtx(id);
+    vtx.toDelete = true;
+  }
+
+  deleteAllMarked() {
+    for (let id in this.store) {
+      let vtx = this.getVtx(id);
+      vtx?.toDelete && this.deleteVtx(id);
+    }
   }
 
   /**

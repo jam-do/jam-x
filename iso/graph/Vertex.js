@@ -16,5 +16,7 @@ export class Vertex {
     this.value = src.value || Object.create(null);
     /** @type {Number} */
     this.timestamp = Date.now();
+    /** @type {Boolean} */
+    this.toDelete = false;
   }
 }

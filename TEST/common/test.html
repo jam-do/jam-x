@@ -1,0 +1,55 @@
+<script src="../../render-tags/index.js" type="module"></script>
+
+<x-route name="home"></x-route>
+
+<x-root-styles src="../../csslib/index.css.js"></x-root-styles>
+
+<x-doc route="" base="">
+  <template>
+
+    <column-el>
+
+      <card-el style-red style="padding: 0; text-align: center;">
+        <img src="../../reference/logo.svg" width="240" />
+      </card-el>
+
+      <card-el>
+        <x-md src="../../README.md" data-src="../x-md/test.json"></x-md>
+      </card-el>
+
+      <card-el style-green>
+        <h3>x-dwa:</h3>
+        <x-dwa src="../x-dwa/dwa.html.js"></x-dwa>
+      </card-el>
+
+      <card-el>
+        <h3>x-repeat (inner template):</h3>
+        <x-repeat data-src="../x-repeat/test.json">
+          <template>
+            <div>{{text1}}</div>
+            <div>{{text2}}</div>
+            <div>{{text3}}</div>
+          </template>
+        </x-repeat>
+      </card-el>
+
+      <card-el style-blue>
+        <h3>x-repeat (template-id):</h3>
+
+        <template id="list-1">
+          <div>{{text1}}</div>
+          <div>{{text2}}</div>
+          <div>{{text3}}</div>
+        </template>
+
+        <x-repeat data-src="../x-repeat/test.json" template-id="list-1"></x-repeat>
+      </card-el>
+
+      <card-el style-grey>
+        <x-import src="../x-import/asset.html" data-src="../x-md/test.json"></x-import>
+      </card-el>
+
+    </column-el>
+
+  </template>
+</x-doc>

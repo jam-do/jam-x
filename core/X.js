@@ -1,5 +1,5 @@
 import { BaseComponent } from '../symbiote/core/BaseComponent.js';
-import { applyData } from '../iso/applyData.js';
+import { applyData } from '../jam-tools/iso/applyData.js';
 
 export { PubSub } from '../symbiote/core/PubSub.js';
 export { UID } from '../symbiote/utils/UID.js'; 

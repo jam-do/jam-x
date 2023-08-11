@@ -1,5 +1,5 @@
-import { PubSub } from '../../symbiote/core/PubSub.js';
-import { UID } from '../../symbiote/utils/UID.js';
+import { PubSub } from '../symbiote/core/PubSub.js';
+import { UID } from '../symbiote/utils/UID.js';
 import { Vertex } from './Vertex.js';
 
 function log(msg) {

@@ -1,5 +1,5 @@
 import X from '../core/X.js';
-import { applyData } from '../iso/applyData.js';
+import { applyData } from '../jam-tools/iso/applyData.js';
 
 export class XRepeat extends X {
   initCallback() {

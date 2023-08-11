@@ -1,4 +1,5 @@
 import vars from './vars.css.js';
+import elements from './elements.css.js';
 
 export default /*css*/ `
 ${vars}
@@ -25,22 +26,6 @@ blockquote {
   border-left: 2px solid currentColor;
   box-sizing: border-box;
 }
-column-el {
-  display: block;
-  max-width: 960px;
-  margin-left: auto;
-	margin-right: auto;
-  padding: var(--gap-mid);
-}
-card-el {
-  display: block;
-  background-color: var(--clr2);
-  color: var(--clr1);
-  padding: var(--gap-max);
-  border-radius: var(--r2);
-  margin-top: var(--gap-mid);
-  margin-bottom: var(--gap-mid);
-}
 [style-red] {
   --clr1: #fff;
   --clr2: #e05353;
@@ -57,4 +42,6 @@ card-el {
   --clr1: #fff;
   --clr2: #212121;
 }
+
+${elements}
 `;

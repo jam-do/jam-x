@@ -1,8 +1,6 @@
 import { X } from '../core/index.js';
 
 let AiProxyPort = '8080';
-const aiTopicCtx = 'This question could contain 2 parts: the text prompt an the structured HTML template to process. ';
-const aiResultDescription = ' Use the HTML format for the response output. Do not add any additional comments or descriptions to the result, because it will be used as a part of HTML-document.';
 
 export class XAI extends X {
 
@@ -20,7 +18,7 @@ export class XAI extends X {
       lsMap = Object.create(null);
     }
     if (!lsMap[prompt]) {
-      lsMap[prompt] = await (await fetch(`http://localhost:${AiProxyPort}/`, {
+      lsMap[prompt] = await (await fetch(`http://localhost:${AiProxyPort}/html/`, {
         method: 'POST',
         body: prompt,
         })).text();
@@ -34,7 +32,7 @@ export class XAI extends X {
       if (!val.trim()) {
         return;
       }
-      this.handlePrompt(aiTopicCtx + val + this.innerHTML + aiResultDescription);
+      this.handlePrompt(val + ' ' + this.innerHTML);
     });
 
     this.sub('port', (val) => {

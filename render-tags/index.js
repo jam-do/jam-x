@@ -5,6 +5,7 @@ export * from './x-repeat.js';
 export * from './x-import.js';
 export * from './x-root-styles.js';
 export * from './x-ai.js';
+export * from './x-ai-img.js';
 
 // export * from './x-build.js';
 // export * from './x-component.js';

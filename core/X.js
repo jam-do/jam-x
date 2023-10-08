@@ -1,9 +1,13 @@
 import { BaseComponent } from '../symbiote/core/BaseComponent.js';
 import { applyData } from '../jam-tools/iso/applyData.js';
+import { IDB } from '../jam-tools/browser/IDB.js';
+import { html } from '../symbiote/core/html.js';
 
 export { PubSub } from '../symbiote/core/PubSub.js';
 export { UID } from '../symbiote/utils/UID.js'; 
 export class X extends BaseComponent {
+
+  static html = html;
 
   /**
    * 
@@ -94,6 +98,13 @@ export class X extends BaseComponent {
 
   getTemplateHTML() {
     return this.getTemplate()?.innerHTML || '';
+  }
+
+  static get cache() {
+    if (!this._dbi) {
+      this._dbi = IDB.open('jam-x', 'AI');
+    }
+    return this._dbi;
   }
 
 }

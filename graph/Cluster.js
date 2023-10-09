@@ -163,7 +163,7 @@ export class Cluster {
     vtx.edges.forEach((uid) => {
       let linked = this.getVtx(uid);
       if (linked.value !== dispatcher) {
-        linked.value?.update(newData);
+        linked.value?.update?.(newData);
       }
     });
   }

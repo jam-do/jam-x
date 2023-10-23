@@ -87,7 +87,14 @@ export class LightItem extends HTMLElement {
           this[localProp] = val;
           let bindDesc = this.constructor['bindMap'][prop];
           for (let uid in bindDesc) {
-            let el = this.querySelector(`[${bindAttrName}="${uid}"]`);
+            if (!this.__bMap)  {
+              this.__bMap = {};
+            }
+            let el = this.__bMap[uid];
+            if (!el) {
+              el = this.querySelector(`[${bindAttrName}="${uid}"]`);
+              this.__bMap[uid] = el;
+            }
             if (el) {
               if (bindDesc[uid].props) {
                 bindDesc[uid].props.forEach((property) => {

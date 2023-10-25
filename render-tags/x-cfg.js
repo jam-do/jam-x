@@ -75,7 +75,7 @@ class XCfgRow extends X {
           this.ref.value.appendChild(xTable);
         },
       }
-      valMap[valType]();
+      valMap[valType]?.();
     });
   }
 }

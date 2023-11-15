@@ -43,12 +43,12 @@ x-table-row {
 XTable.template = /*html*/ `
 <table>
   <thead>
-    <tr list="">
+    <tr itemize="">
     </tr>
   </thead>
   <tbody
-    list-item-tag="x-table-row"
-    list="data">
+    item-tag="x-table-row"
+    itemize="data">
   </tbody>
 </table>
 `;

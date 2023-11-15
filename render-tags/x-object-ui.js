@@ -185,8 +185,8 @@ x-object-ui[is-array] input.field-name {
 XObjectUi.template = /*html*/ `
 <table>
   <tbody
-    list="tbodyData"
-    list-item-tag="x-object-ui-row"></tbody>
+    itemize="tbodyData"
+    item-tag="x-object-ui-row"></tbody>
 </table>
 <div class="toolbar editable">
   <input class="field-name" type="text" ref="fieldName">

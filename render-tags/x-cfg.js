@@ -136,8 +136,8 @@ export class XCfg extends X {
 XCfg.template = /*html*/ `
 <table>
   <tbody
-    list="tbodyData"
-    list-item-tag="x-cfg-row"></tbody>
+    itemize="tbodyData"
+    item-tag="x-cfg-row"></tbody>
 </table>
 <div class="toolbar editable">
   <input type="text" ref="fieldName">

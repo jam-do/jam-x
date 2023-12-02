@@ -1,11 +1,11 @@
-import { BaseComponent } from '../symbiote/core/BaseComponent.js';
+import { Symbiote } from '../symbiote/core/Symbiote.js';
 import { applyData } from '../jam-tools/iso/applyData.js';
 import { IDB } from '../jam-tools/browser/IDB.js';
 import { html } from '../symbiote/core/html.js';
 
 export { PubSub } from '../symbiote/core/PubSub.js';
 export { UID } from '../symbiote/utils/UID.js'; 
-export class X extends BaseComponent {
+export class X extends Symbiote {
 
   static html = html;
 

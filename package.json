@@ -50,7 +50,8 @@
     "lint-staged": "^11.2.3",
     "prettier": "^2.0.5",
     "prettier-plugin-jsdoc": "0.0.17",
-    "typescript": "^5.0.2"
+    "typescript": "^5.0.2",
+    "@symbiotejs/symbiote": "^2.0.2"
   },
   "eslintConfig": {
     "extends": [
@@ -105,8 +106,5 @@
       "prettier --write",
       "git add"
     ]
-  },
-  "dependencies": {
-    "@symbiotejs/symbiote": "^2.0.0-alpha.4"
   }
 }

@@ -1,7 +1,7 @@
 [submodule "symbiote"]
 	path = symbiote
 	url = https://github.com/symbiotejs/symbiote.js.git
-	branch = alpha
+	branch = 2.0
 [submodule "jam-tools"]
 	path = jam-tools
 	url = https://github.com/jam-do/jam-tools.git

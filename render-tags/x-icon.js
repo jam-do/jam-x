@@ -21,6 +21,10 @@ XIcon.rootStyles = /*css*/ `
     justify-content: center;
     align-items: center;
   }
+  x-icon svg {
+    height: 100%;
+    width: 100%;
+  }
   x-icon svg path {
     fill: currentColor;
   }
@@ -28,7 +32,7 @@ XIcon.rootStyles = /*css*/ `
 
 XIcon.template = /*html*/ `
 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-  <path bind="@d: '+d'"></path>
+  <path bind="@d: +d"></path>
 </svg>
 `;
 

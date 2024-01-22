@@ -1,7 +1,6 @@
-import { Symbiote } from '../symbiote/core/Symbiote.js';
+import Symbiote, { html } from '../symbiote/core/Symbiote.js';
 import { applyData } from '../jam-tools/iso/applyData.js';
 import { IDB } from '../jam-tools/browser/IDB.js';
-import { html } from '../symbiote/core/html.js';
 
 export { PubSub } from '../symbiote/core/PubSub.js';
 export { UID } from '../symbiote/utils/UID.js'; 

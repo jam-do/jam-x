@@ -6,21 +6,17 @@ export class XIcon extends X {
   };
 
   init$ = {
-    name: 'default',
-    d: XIcon.iconSet.default,
-  }
-
-  initCallback() {
-    this.sub('name', (val) => {
-      this.$.d = XIcon.iconSet[val] || XIcon.iconSet.default;
-    });
+    '@name': 'default',
+    '+d': () => {
+      return XIcon.iconSet[this.$['@name']] || XIcon.iconSet.default;
+    } ,
   }
 }
 
 XIcon.rootStyles = /*css*/ `
   x-icon {
-    height: 40px;
-    width: 40px;
+    height: 1.2em;
+    width: 1.2em;
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -31,14 +27,10 @@ XIcon.rootStyles = /*css*/ `
 `;
 
 XIcon.template = /*html*/ `
-<svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg">
-  <path bind="@d: d"></path>
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <path bind="@d: '+d'"></path>
 </svg>
 `;
-
-XIcon.bindAttributes({
-  name: 'name',
-});
 
 XIcon.reg('x-icon');
 

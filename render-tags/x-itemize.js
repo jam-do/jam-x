@@ -1,7 +1,7 @@
 import X from '../core/X.js';
 import { applyData } from '../jam-tools/iso/applyData.js';
 
-export class XRepeat extends X {
+export class XItemize extends X {
   initCallback() {
     this.getData().then((data) => {
       if (!data) {
@@ -37,4 +37,4 @@ export class XRepeat extends X {
   }
 }
 
-XRepeat.reg('x-repeat');
+XItemize.reg('x-itemize');
